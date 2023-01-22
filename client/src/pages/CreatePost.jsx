@@ -6,7 +6,7 @@ import { FormField, Loader } from "../components";
 
 export const CreatePost = () => {
   const navigate = useNavigate();
-  const [form, setform] = useState({
+  const [form, setForm] = useState({
     name: "",
     prompt: "",
     photo: "",
@@ -16,8 +16,15 @@ export const CreatePost = () => {
 
   const generateImage = () => {};
   const handleSubmit = () => {};
-  const handleChange = () => {};
-  const handleSupriseMe = () => {};
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSupriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -85,7 +92,7 @@ export const CreatePost = () => {
             className="text-white bg-green-700
            font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
-            {generateImg ? "Generating..." : "Generate Image"}
+            {generatingImg ? "Generating..." : "Generate Image"}
           </button>
         </div>
         <div className="mt-10">
